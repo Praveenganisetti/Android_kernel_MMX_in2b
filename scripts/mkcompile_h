@@ -86,8 +86,8 @@ UTS_LEN=64
 UTS_TRUNCATE="cut -b -$UTS_LEN"
 
 COMPILER_VERSION=`$CC -v 2>&1 | grep ' version '`
-if [ $BUILD_CONST_BUILD_KERNEL_COMPILER != "DEFAULT" ]; then
-    COMPILER_VERSION=$BUILD_CONST_BUILD_KERNEL_COMPILER
+if [ "$BUILD_CONST_BUILD_KERNEL_COMPILER" != "DEFAULT" ]; then
+    COMPILER_VERSION="$BUILD_CONST_BUILD_KERNEL_COMPILER"
 fi
 # Generate a temporary compile.h
 
@@ -102,8 +102,11 @@ fi
   echo \#define LINUX_COMPILE_HOST \"`echo $LINUX_COMPILE_HOST | $UTS_TRUNCATE`\"
 
   CC_VERSION=$($CC -v 2>&1 | grep ' version ' | sed 's/[[:space:]]*$//')
-  LD_VERSION=$($LD -v | head -n1 | sed 's/(compatible with [^)]*)//' \
-		      | sed 's/[[:space:]]*$//')
+  LD_VERSION=""
+if [ "$LD" != "DEFAULT" ]; then
+    LD_VERSION=$($LD -v | head -n1 | sed 's/(compatible with [^)]*)//' | sed 's/[[:space:]]*$//')
+fi
+
   printf '#define LINUX_COMPILER "%s"\n' "$CC_VERSION, $LD_VERSION"
 ) > .tmpcompile
 
