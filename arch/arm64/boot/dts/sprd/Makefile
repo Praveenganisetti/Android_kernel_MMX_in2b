@@ -10,13 +10,11 @@ dtbo-$(CONFIG_ARCH_SPRD) += \
 	sp9863a-1c10-overlay.dtbo \
 	sp9863a-1h10-overlay.dtbo \
 	sp9863a-1h10_go-overlay.dtbo \
-	sp9863a-1h20-overlay.dtbo
 
 sp9863a-3h10-overlay.dtbo-base := sp9863a.dtb
 sp9863a-1c10-overlay.dtbo-base := sp9863a.dtb
 sp9863a-1h10-overlay.dtbo-base := sp9863a.dtb
 sp9863a-1h10_go-overlay.dtbo-base := sp9863a.dtb
-sp9863a-1h20-overlay.dtbo-base := sp9863a.dtb
 endif
 
 ifeq ($(BSP_BUILD_FAMILY),sharkl5Pro)
@@ -74,8 +72,7 @@ dtbo-$(CONFIG_ARCH_SPRD) += \
 	sp9863a-3h10-overlay.dtbo \
 	sp9863a-1c10-overlay.dtbo \
 	sp9863a-1h10-overlay.dtbo \
-	sp9863a-1h10_go-overlay.dtbo \ \
-	sp9863a-1h20-overlay.dtbo \
+	sp9863a-1h10_go-overlay.dtbo \
 	ums512-1h10-overlay.dtbo \
 	ums512-1h10_go-overlay.dtbo \
 	ums512-2h10-overlay.dtbo \
