@@ -1189,13 +1189,19 @@ static uint8_t nvt_fw_recovery(uint8_t *point_data)
 extern int nt36525b_is_xx_module(void);////0:TRULY NT36525B TRULY  1:HUAXIAN NT36525B SHARP 2:HUAXIAN NT36525B HUAJIACAI 
 static int nvt_update_firmware_checkmodule(void){
 	char firmware_name[256] = "";
-	int ret;
-	if(nt36525b_is_xx_module()==1)
-	   sprintf(firmware_name, BOOT_UPDATE_FIRMWARE_HX_NAME);
-    else if(nt36525b_is_xx_module()==2)
-	   sprintf(firmware_name, BOOT_UPDATE_FIRMWARE_HJC_NAME);   
-	else
-	    sprintf(firmware_name, BOOT_UPDATE_FIRMWARE_NAME);
+	int ret;	
+	int module_type = nt36525b_is_xx_module();
+	switch (module_type) {
+        case 1:
+            snprintf(firmware_name, sizeof(firmware_name), "%s", BOOT_UPDATE_FIRMWARE_HX_NAME);
+            break;
+        case 2:
+            snprintf(firmware_name, sizeof(firmware_name), "%s", BOOT_UPDATE_FIRMWARE_HJC_NAME);
+            break;
+        default:
+            snprintf(firmware_name, sizeof(firmware_name), "%s", BOOT_UPDATE_FIRMWARE_NAME);
+    }
+    
 	ret =nvt_update_firmware(firmware_name);
     return	ret;
 }
