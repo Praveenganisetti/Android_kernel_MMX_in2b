@@ -8,7 +8,6 @@ export CLANG_TRIPLE=aarch64-linux-gnu-
 
 export BSP_BUILD_FAMILY=sharkl5Pro
 export DTC_OVERLAY_TEST_EXT=$(pwd)/tools/mkdtimg/ufdt_apply_overlay
-export DTC_OVERLAY_VTS_EXT=$(pwd)/tools/mkdtimg/ufdt_verify_overlay_host
 export BSP_BUILD_ANDROID_OS=y
 
 #export CONFIG=sprd_sharkl5Pro_defconfig
