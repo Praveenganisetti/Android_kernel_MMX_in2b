@@ -8,3 +8,9 @@ int nt36525b_is_xx_module(void) {
     return 0;
 }
 
+// Definition of tp_sprocomm_esd_flag
+volatile int tp_sprocomm_esd_flag = 0;
+
+// Definition of sprocomm_gesture_enable
+int sprocomm_gesture_enable = 0;
+
