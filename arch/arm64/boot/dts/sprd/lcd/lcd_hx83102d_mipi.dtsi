@@ -1,0 +1,50 @@
+/ {
+	fragment {
+		target-path = "/";
+		__overlay__ {
+			lcds {
+				lcd_hx83102d_mipi: lcd_hx83102d_mipi {				
+					lcd-glass = "TRULY";
+					lcd-module = "TRULY";
+					lcd-name = "HX83102D";
+					
+					sprd,dsi-color-format = "rgb888";
+					sprd,dsi-lane-number = <4>;
+					sprd,dsi-work-mode = <1>;
+					
+					sprd,esd-check-enable = <0>;
+					sprd,esd-check-mode = <1>;
+					sprd,esd-check-period = <1000>;
+					sprd,esd-check-register = <10>;
+					sprd,esd-check-value = <156>;
+					sprd,height-mm = <151>;
+					sprd,initial-command = <0x39000004 0xb983102d 0x23000002 0xbd003900 0xcc033 0x33000019 0x42000800 0x1a1b3900 0xcb122 0x44313131 0x424d2f08 0x8083900 0xfb200 0x64000 0xd203d13 0x185 0xa0390000 0xfb4081b 0x81b4c4a 0x4c4a10ff 0x100000ff 0x23000002 0xcc023905 0x1ad306 0x2010100 0x3f00 0x37350b0b 0x3210 0x7000754 0x164e064e 0x3905002d 0xd5252419 0x19181818 0x18181818 0x1818180f 0xe07060d 0xc05040b 0xa030209 0x8010021 0x20212018 0x18181818 0x18181818 0x18390500 0x2dd62021 0x18181818 0x18181919 0x18181818 0x10809 0x2030a0b 0x4050c0d 0x6070e0f 0x24252425 0x18181818 0x18181818 0x18182300 0x2bd02 0x3900000d 0xd8ffffff 0xfffff0ff 0xffffffff 0xf0230000 0x2bd0339 0x19d8 0xaaaaaaaa 0xaaa0aaaa 0xaaaaaaa0 0xffffffff 0xfff0ffff 0xfffffff0 0x23000002 0xbd003900 0x14ba70 0x23a883b2 0xc0c00110 0xd 0x3d827704 0x1003900 0x8bffc 0x49cf6 0x513900 0x6cb00 0x1300028d 0x23000002 0xbd012300 0x2cb01 0x23000002 0xbd023900 0x9b442 0xb30033 0x33b30039 0x4b1 0x7f03f523 0x2bd 0x390000 0x1ee7ff10 0x2022121 0x11111c13 0x13801380 0x32320000 0x1710 0x6810101d 0xb923b923 0x2bd 0x1390000 0x8e70232 0x1641032 0x11230000 0x2bd0239 0x14e7 0xff020000 0x3300 0x2010000 0x0 0x2010023 0x2bd 0x390000 0x5d12000 0x273900 0x7c700 0xc2001042 0x390000 0x3510fff 0x23000002 0x532c2300 0x25500 0x23000002 0x35002396 0x11123 0x32000129>;
+					sprd,is_ic_himax = <1>;
+					sprd,phy-bit-clock = <37067>;
+					sprd,phy-escape-clock = <20000>;
+					sprd,reset-off-sequence = <1 10 0 20 1 50>;
+					sprd,reset-on-sequence = <1 10 0 10 1 50>;
+					sprd,sleep-in-command = [23 32 00 01 28 23 96 00 01 10];
+					sprd,sleep-out-command = [23 96 00 01 11 23 32 00 01 29];
+					sprd,width-mm = <68>;
+
+					display-timings {
+						native-mode = <5>;
+
+						timing0 {
+							clock-frequency = <49766528>;
+							hactive = <720>;
+							hback-porch = <28>;
+							hfront-porch = <32>;
+							hsync-len = <4>;
+							vactive = <1600>;
+							vback-porch = <14>;
+							vfront-porch = <16>;
+							vsync-len = <2>;
+						};
+					};
+				};
+			};
+		};
+	};
+};
