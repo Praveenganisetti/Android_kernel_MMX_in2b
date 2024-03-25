@@ -8,10 +8,17 @@
 #include <dt-bindings/mfd/sprd,sc2730-regs.h>
 #include <dt-bindings/mfd/sprd,sc2730-mask.h>
 #include <dt-bindings/wdv/wdv.h>
-// add 1th LCD begin:
-#include "lcd/lcd_nt36525b_djn_mipi_hd.dtsi"
-// add 1th LCD end
 #include "lcd/lcd_dummy_mipi.dtsi"
+// add LCD's begin:
+#include "lcd/lcd_hx83102d_mipi.dtsi"
+#include "lcd/lcd_ili9881h_huaying_mipi.dtsi"
+#include "lcd/lcd_ili9882h_gx_mipi.dtsi"
+#include "lcd/lcd_ili9882q_huaying_mipi.dtsi"
+#include "lcd/lcd_nt36525b_hjc_mipi.dtsi"
+#include "lcd/lcd_nt36525b_hx_mipi.dtsi"
+#include "lcd/lcd_nt36525b_mipi.dtsi"
+// add LCD's end
+
 
 / {
 
@@ -26,9 +33,17 @@
 				compatible = "sprd,sc2355-wifi";
 			};
 
-			fingerprint@0 {
-				compatible = "microarray,afs121";
-				fpint-gpios = <&eic_async 13 0>;
+			fingerprint {
+		                compatible = "chipone,fingerprint";
+		                fpreset-gpios = <&ap_gpio 131 0>;
+		                fpint-gpios = <&eic_async 13 0>;
+	                };
+			
+			flash-gpios {
+				compatible = "sprd,flash-aw3641";
+				flash-ic = <3641>;
+				flash-torch-en-gpios = <&ap_gpio 132 0>;
+				flash-en-gpios = <&ap_gpio 133 0>;
 			};
 
 			gpio-keys {
@@ -540,22 +555,51 @@
 };
 
 &i2c3 {
-	status = "okay";
+	cs-gpios = <0xffffffff 0x5e 0x1 0xffffffff 0x5e 0x1 0xffffffff 0x5e 0x1 0xffffffff 0x5e 0x1>;
+			status = "okay";
 
-	touchscreen@20 {
-		compatible = "synaptics,dsx";
-		reg = <0x20>;
-		gpios = <&ap_gpio 145 GPIO_ACTIVE_HIGH
-			&ap_gpio 144 GPIO_ACTIVE_HIGH>;
-	};
+			chipone_tddi@3 {
+				chipone,irq-gpio = <0xffffffff 0x90 0x0>;
+				chipone,rst-gpio = <0xffffffff 0x91 0x0>;
+				chipone,x-res = <0x2d0>;
+				chipone,y-res = <0x640>;
+				compatible = "chipone-tddi";
+				interrupt-parent = <0xffffffff>;
+				interrupts = <0x90 0x2008>;
+				reg = <0x3>;
+				spi-max-frequency = <0x989680>;
+			};
 
-	touchscreen@53 {
-		compatible = "solomon,ssd20xx";
-		reg = <0x53>;
-		gpios = <&ap_gpio 145 GPIO_ACTIVE_HIGH
-			&ap_gpio 144 GPIO_ACTIVE_HIGH>;
-	};
-};
+			himax_ts@2 {
+				compatible = "himax,hxcommon";
+				himax,display-coords = <0x0 0x2d0 0x0 0x640>;
+				himax,irq-gpio = <0xffffffff 0x90 0x0>;
+				himax,panel-coords = <0x0 0x2d0 0x0 0x640>;
+				himax,rst-gpio = <0xffffffff 0x91 0x0>;
+				reg = <0x2>;
+				spi-max-frequency = <0x989680>;
+				status = "ok";
+			};
+
+			ili9882h@0 {
+				compatible = "tchip,ilitek";
+				reg = <0x0>;
+				spi-max-frequency = <0x989680>;
+				touch,irq-gpio = <0xffffffff 0x90 0x0>;
+				touch,reset-gpio = <0xffffffff 0x91 0x0>;
+			};
+
+			novatek@1 {
+				compatible = "novatek,NVT-ts-spi";
+				novatek,irq-gpio = <0xffffffff 0x90 0x0>;
+				novatek,reset-gpio = <0xffffffff 0x91 0x0>;
+				novatek,spi-rd-fast-addr = <0x3f310>;
+				novatek,swrst-n8-addr = <0x3f0fe>;
+				reg = <0x1>;
+				spi-max-frequency = <0x927c00>;
+				status = "ok";
+			};
+		};
 
 &i2c4 {
 	status = "okay";
@@ -616,7 +660,6 @@
 &spi2 {
 	status = "okay";
 };
-#include "novatek-nt36xxx-spi.dtsi"
 
 &aon_i2c0 {
 	status = "okay";
