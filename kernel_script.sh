@@ -2,7 +2,7 @@
 
 export ARCH=arm64
 export SUBARCH=arm64
-export CLANG_PATH=/home/praveen/toolchain/clang/bin
+export CLANG_PATH=/home/praveen/Downloads/Toolchains/clang/clang-11.0.2/bin
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
 
